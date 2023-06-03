@@ -49,6 +49,11 @@ class Task(models.Model):
         choices=status_choices,
         default=BACKLOG
     )
+    category = models.CharField(
+        max_length=255,
+        blank=False,
+        default="Uncatagorised"
+    )
 
     class Meta:
         ordering = ['-created_date']
