@@ -42,6 +42,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '8000-phantompwr-pp5productiv-ne7lnrolz57.ws-eu98.gitpod.io',
+    '.ws-eu98.gitpod.io',
 ]
 
 
