@@ -52,7 +52,7 @@ class Task(models.Model):
     category = models.CharField(
         max_length=255,
         blank=False,
-        default="Uncatagorised"
+        default="Uncategorised"
     )
 
     class Meta:

@@ -54,7 +54,7 @@ class TaskDetail(APIView):
     def get(self, request, pk):
         task = self.get_object(pk)
         serializer = TaskSerializer(
-            profile, context={'request': request}
+            task, context={'request': request}
         )
         return Response(serializer.data)
 
@@ -66,4 +66,14 @@ class TaskDetail(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+            )
+
+    def delete(self, request, pk):
+        task = self.get_object(pk)
+        task.delete()
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )
