@@ -1,5 +1,5 @@
 from django.http import Http404
-from rest_framework import status, permissions
+from rest_framework import status, permissions, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Task
@@ -16,6 +16,14 @@ class TaskList(APIView):
     serializer_class = TaskSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
+    ]
+    filter_backends = [
+        filters.SearchFilter,
+    ]
+
+    search_fields = [
+        'owner__username',
+        'title',
     ]
 
     def get(self, request):

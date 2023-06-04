@@ -50,6 +50,7 @@ class Task(models.Model):
     )
     title = models.CharField(max_length=255)
     notes = models.TextField(blank=True)
+    owner_comments = models.TextField(blank=True)
     attachments = models.FileField(
         upload_to='images/', default='../default_post_bge1xm', blank=True
     )
@@ -74,3 +75,6 @@ class Task(models.Model):
 
     def __str__(self):
         return f'{self.id} {self.title}'
+
+
+# To-do: Add category model to pre-populate a select list
