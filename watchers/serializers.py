@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from rest_framework import serializers
 from .models import Watcher
 
@@ -9,11 +10,13 @@ class WatcherSerializer(serializers.ModelSerializer):
     '''
 
     owner = serializers.ReadOnlyField(source='owner.username')
+    watched_name = serializers.ReadOnlyField(source='watched.username')
 
     class Meta:
         model = Watcher
         fields = [
-            'id', 'created_at', 'owner', 'task'
+            # 'created_at', 'owner', 'task'
+            'created_at', 'owner', 'watched', 'watched_name'
         ]
 
     def create(self, validated_data):
