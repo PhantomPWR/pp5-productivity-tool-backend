@@ -1,4 +1,5 @@
 from django.http import Http404
+from django.db.models import Count
 from rest_framework import status, permissions, filters, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -19,9 +20,16 @@ class TaskList(generics.ListCreateAPIView):
         permissions.IsAuthenticatedOrReadOnly
     ]
     filter_backends = [
-        filters.SearchFilter,
+        filters.OrderingFilter,
+        filters.SearchFilter
     ]
-    queryset = Task.objects.all()
+    queryset = Task.objects.annotate(
+        watcher_count=Count('task_watched__task_watched', distinct=True),
+    ).order_by('-created_date')
+
+    ordering_fields = [
+        'watcher_count',
+    ]
 
     search_fields = [
         'owner__username',
@@ -35,4 +43,6 @@ class TaskList(generics.ListCreateAPIView):
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TaskSerializer
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Task.objects.all()
+    queryset = Task.objects.annotate(
+        watcher_count=Count('task_watched__task_watched', distinct=True),
+    ).order_by('-created_date')
