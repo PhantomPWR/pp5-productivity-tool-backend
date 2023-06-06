@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
 from drf_api.permissions import IsOwnerOrReadOnly
-from watchers.models import Watcher
+from .models import Watcher
 from watchers.serializers import WatcherSerializer
 
 

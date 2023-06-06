@@ -3,6 +3,7 @@ from rest_framework import status, permissions, filters, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Task
+from watchers.models import Watcher
 from .serializers import TaskSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 

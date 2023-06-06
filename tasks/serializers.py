@@ -1,26 +1,25 @@
 from rest_framework import serializers
-from .models import Task
+from tasks.models import Task
 from watchers.models import Watcher
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    owner = serializers.ReadOnlyField(source='username')
     is_owner = serializers.SerializerMethodField()
-    watching_id = serializers.SerializerMethodField()
+    watched_id = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
 
-    def get_watching_id(self, obj):
+    def get_watched_id(self, obj):
         user = self.context['request'].user
-        print(user)
         if user.is_authenticated:
-            watching = Watcher.objects.filter(
-                # owner=user, watched=obj.owner
-                owner=user
+            task_watched = Watcher.objects.filter(
+                owner=user, task_watched=obj
             ).first()
-            print(watching)
+            return task_watched.id if task_watched else None
+        return None
 
     class Meta:
         model = Task
@@ -28,5 +27,5 @@ class TaskSerializer(serializers.ModelSerializer):
             'id', 'owner', 'title', 'category',
             'notes', 'attachments', 'priority', 'status', 'owner_comments',
             'created_date', 'due_date', 'updated_date', 'completed_date',
-            'is_owner', 'watching_id'
+            'is_owner', 'watched_id'
         ]

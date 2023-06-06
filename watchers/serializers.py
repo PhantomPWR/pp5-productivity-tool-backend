@@ -4,19 +4,13 @@ from .models import Watcher
 
 
 class WatcherSerializer(serializers.ModelSerializer):
-    '''
-    Serializer for the Watcher model
-    The create method handles the unique constraint on 'owner' and 'post'
-    '''
 
     owner = serializers.ReadOnlyField(source='owner.username')
-    watched_name = serializers.ReadOnlyField(source='watched.username')
 
     class Meta:
         model = Watcher
         fields = [
-            # 'created_at', 'owner', 'task'
-            'created_at', 'owner', 'watched', 'watched_name'
+            'id', 'created_at', 'owner', 'task_watched'
         ]
 
     def create(self, validated_data):
