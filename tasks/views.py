@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.db.models import Count
 from rest_framework import status, permissions, filters, generics
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Task
@@ -21,7 +22,12 @@ class TaskList(generics.ListCreateAPIView):
     ]
     filter_backends = [
         filters.OrderingFilter,
-        filters.SearchFilter
+        filters.SearchFilter,
+        DjangoFilterBackend
+    ]
+    filterset_fields = [
+        'task_watched__owner__profile',
+        'owner__profile'
     ]
     queryset = Task.objects.annotate(
         watcher_count=Count('task_watched__task_watched', distinct=True),
