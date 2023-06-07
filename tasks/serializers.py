@@ -1,3 +1,4 @@
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from rest_framework import serializers
 from tasks.models import Task
 from watchers.models import Watcher
@@ -8,10 +9,18 @@ class TaskSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     watched_id = serializers.SerializerMethodField()
     watcher_count = serializers.ReadOnlyField()
+    created_date = serializers.SerializerMethodField()
+    updated_date = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
+
+    def get_created_date(self, obj):
+        return naturaltime(obj.created_date)
+
+    def get_updated_date(self, obj):
+        return naturaltime(obj.updated_date)
 
     def get_watched_id(self, obj):
         user = self.context['request'].user
