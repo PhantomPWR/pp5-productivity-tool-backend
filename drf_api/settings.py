@@ -77,7 +77,7 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = [
     'ALLOWED_HOST',
     'localhost',
-    '.ws-eu98.gitpod.io',
+    '.gitpod.io',
 ]
 
 
