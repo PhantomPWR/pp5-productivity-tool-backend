@@ -39,3 +39,16 @@ class TaskSerializer(serializers.ModelSerializer):
             'due_date', 'updated_date', 'completed_date', 'is_owner',
             'watched_id', 'watcher_count'
         ]
+
+
+class TaskDetailSerializer(TaskSerializer):
+    task = serializers.ReadOnlyField(source='task.id')
+
+    class Meta:
+        model = Task
+        fields = [
+            'id', 'owner', 'title', 'category', 'notes', 'attachments',
+            'priority', 'status', 'owner_comments', 'created_date',
+            'due_date', 'updated_date', 'completed_date', 'is_owner',
+            'watched_id', 'watcher_count', 'task'
+        ]

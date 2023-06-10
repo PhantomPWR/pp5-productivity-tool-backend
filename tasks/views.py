@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Task
 from watchers.models import Watcher
-from .serializers import TaskSerializer
+from .serializers import TaskSerializer, TaskDetailSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 
 
@@ -47,7 +47,7 @@ class TaskList(generics.ListCreateAPIView):
 
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = TaskSerializer
+    serializer_class = TaskDetailSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Task.objects.annotate(
         watcher_count=Count('task_watched__task_watched', distinct=True),
