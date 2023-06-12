@@ -51,6 +51,7 @@ class TaskDetailSerializer(TaskSerializer):
         model = Task
         fields = [
             'id', 'owner', 'title', 'category', 'notes', 'attachments',
+            'profile_id', 'profile_image',
             'priority', 'status', 'owner_comments', 'created_date',
             'due_date', 'updated_date', 'completed_date', 'is_owner',
             'watched_id', 'watcher_count', 'task'
