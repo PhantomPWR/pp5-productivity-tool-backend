@@ -1,10 +1,11 @@
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.db.models import Count
 from rest_framework import status, permissions, filters, generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Task
+from .choices import STATUS_CHOICES
 from watchers.models import Watcher
 from .serializers import TaskSerializer, TaskDetailSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
@@ -52,3 +53,10 @@ class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.annotate(
         watcher_count=Count('task_watched__task_watched', distinct=True),
     ).order_by('-created_date')
+
+
+def status_choices_view(request):
+    return JsonResponse(
+        {'status_choices': [choice[0] for choice in STATUS_CHOICES]}
+    )
+

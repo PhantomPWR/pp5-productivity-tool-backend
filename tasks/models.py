@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from .choices import STATUS_CHOICES
+from .choices import BACKLOG
 
 
 class Task(models.Model):
@@ -18,16 +20,7 @@ class Task(models.Model):
         (PRIORITY3, "3")
     ]
 
-    BACKLOG = "Backlog"
-    TODO = "To Do"
-    INPROGRESS = "In Progress"
-    COMPLETED = "Completed"
-    status_choices = [
-        (BACKLOG, "Backlog"),
-        (TODO, "To Do"),
-        (INPROGRESS, "In Progress"),
-        (COMPLETED, "Completed")
-    ]
+    status_choices = STATUS_CHOICES
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_date = models.DateTimeField(
@@ -61,7 +54,7 @@ class Task(models.Model):
     )
     status = models.CharField(
         max_length=25,
-        choices=status_choices,
+        choices=STATUS_CHOICES,
         default=BACKLOG
     )
     category = models.CharField(
