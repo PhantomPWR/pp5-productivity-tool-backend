@@ -52,7 +52,7 @@ class Task(models.Model):
         choices=priority_choices,
         default=PRIORITY1
     )
-    status = models.CharField(
+    task_status = models.CharField(
         max_length=25,
         choices=STATUS_CHOICES,
         default=BACKLOG
