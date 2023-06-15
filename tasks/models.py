@@ -1,8 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from .choices import STATUS_CHOICES
-from .choices import BACKLOG
+# from .choices import STATUS_CHOICES
+# from .choices import BACKLOG
 
 
 class Task(models.Model):
@@ -10,6 +10,18 @@ class Task(models.Model):
     Task model, related to 'owner', i.e. a User instance.
     Default image set so that we can always reference image.url.
     """
+
+    BACKLOG = "Backlog"
+    TODO = "To Do"
+    INPROGRESS = "In Progress"
+    COMPLETED = "Completed"
+
+    status_choices = [
+        (BACKLOG, "Backlog"),
+        (TODO, "To Do"),
+        (INPROGRESS, "In Progress"),
+        (COMPLETED, "Completed")
+    ]
 
     PRIORITY1 = "1"
     PRIORITY2 = "2"
@@ -54,7 +66,7 @@ class Task(models.Model):
     )
     task_status = models.CharField(
         max_length=25,
-        choices=STATUS_CHOICES,
+        choices=status_choices,
         default=BACKLOG
     )
     category = models.CharField(
