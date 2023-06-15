@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from .views import root_route, logout_route
-from tasks.views import status_choices_view, TaskList, TaskDetail
+# from tasks.views import status_choices_view, TaskList, TaskDetail
+from tasks.views import TaskList, TaskDetail
 
 urlpatterns = [
     path('', root_route),
@@ -14,7 +15,7 @@ urlpatterns = [
         'dj-rest-auth/registration/',
         include('dj_rest_auth.registration.urls')
     ),
-    path('status-choices/', status_choices_view, name='status-choices'),
+    # path('status-choices/', status_choices_view, name='status-choices'),
     path('', include('profiles.urls')),
     path('', include('tasks.urls')),
     path('', include('watchers.urls')),

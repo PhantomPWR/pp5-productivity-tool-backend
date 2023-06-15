@@ -9,22 +9,14 @@ class Task(models.Model):
     Default image set so that we can always reference image.url.
     """
 
-    BACKLOG = "Backlog"
-    TODO = "To Do"
-    INPROGRESS = "In Progress"
-    COMPLETED = "Completed"
-
-    status_choices = [
+    STATUS_CHOICES = [
         (BACKLOG, "Backlog"),
         (TODO, "To Do"),
         (INPROGRESS, "In Progress"),
         (COMPLETED, "Completed")
     ]
 
-    PRIORITY1 = "1"
-    PRIORITY2 = "2"
-    PRIORITY3 = "3"
-    priority_choices = [
+    PRIORITY_CHOICES = [
         (PRIORITY1, "1"),
         (PRIORITY2, "2"),
         (PRIORITY3, "3")
@@ -57,13 +49,13 @@ class Task(models.Model):
     )
     priority = models.CharField(
         max_length=1,
-        choices=priority_choices,
-        default=PRIORITY1
+        choices=PRIORITY_CHOICES,
+        default='PRIORITY1'
     )
     task_status = models.CharField(
         max_length=25,
-        choices=status_choices,
-        default=BACKLOG
+        choices=STATUS_CHOICES,
+        default='BACKLOG'
     )
     category = models.CharField(
         max_length=255,

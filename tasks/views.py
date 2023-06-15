@@ -5,7 +5,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Task
-from .choices import STATUS_CHOICES
+# from .choices import STATUS_CHOICES
 from watchers.models import Watcher
 from .serializers import TaskSerializer, TaskDetailSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
@@ -55,8 +55,8 @@ class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     ).order_by('-created_date')
 
 
-def status_choices_view(request):
-    return JsonResponse(
-        {'status_choices': [choice[0] for choice in STATUS_CHOICES]}
-    )
+# def status_choices_view(request):
+#     return JsonResponse(
+#         {'status_choices': [choice[0] for choice in STATUS_CHOICES]}
+#     )
 
