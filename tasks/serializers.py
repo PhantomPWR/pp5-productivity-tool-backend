@@ -36,11 +36,24 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = [
-            'id', 'owner', 'title', 'category', 'notes', 'attachments',
-            'profile_id', 'profile_image',
-            'priority', 'task_status', 'owner_comments', 'created_date',
-            'due_date', 'updated_date', 'completed_date', 'is_owner',
-            'watched_id', 'watcher_count'
+            'id',
+            'owner',
+            'title',
+            'category',
+            'notes',
+            'attachments',
+            'profile_id',
+            'profile_image',
+            'priority',
+            'task_status',
+            'owner_comments',
+            'created_date',
+            'due_date',
+            'updated_date',
+            'completed_date',
+            'is_owner',
+            'watched_id',
+            'watcher_count'
         ]
 
 
@@ -50,9 +63,22 @@ class TaskDetailSerializer(TaskSerializer):
     class Meta:
         model = Task
         fields = [
-            'id', 'owner', 'title', 'category', 'notes', 'attachments',
-            'profile_id', 'profile_image',
-            'priority', 'task_status', 'owner_comments', 'created_date',
-            'due_date', 'updated_date', 'completed_date', 'is_owner',
-            'watched_id', 'watcher_count', 'task'
+            'id',
+            'owner',
+            'title',
+            'category',
+            'notes',
+            'attachments',
+            'profile_id',
+            'profile_image',
+            'priority',
+            'task_status',
+            'owner_comments',
+            'created_date',
+            'due_date',
+            'updated_date',
+            'completed_date',
+            'is_owner',
+            'watched_id',
+            'watcher_count'
         ]
