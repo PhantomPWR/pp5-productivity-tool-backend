@@ -10,16 +10,16 @@ class Task(models.Model):
     """
 
     STATUS_CHOICES = [
-        (BACKLOG, "Backlog"),
-        (TODO, "To Do"),
-        (INPROGRESS, "In Progress"),
-        (COMPLETED, "Completed")
+        ('BACKLOG', 'Backlog'),
+        ('TODO', 'To Do'),
+        ('INPROGRESS', 'In Progress'),
+        ('COMPLETED', 'Completed')
     ]
 
     PRIORITY_CHOICES = [
-        (PRIORITY1, "1"),
-        (PRIORITY2, "2"),
-        (PRIORITY3, "3")
+        ('PRIORITY1', '1'),
+        ('PRIORITY2', '2'),
+        ('PRIORITY3', '3')
     ]
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -48,7 +48,7 @@ class Task(models.Model):
         upload_to='images/', default='../default_post_bge1xm', blank=True
     )
     priority = models.CharField(
-        max_length=1,
+        max_length=25,
         choices=PRIORITY_CHOICES,
         default='PRIORITY1'
     )
