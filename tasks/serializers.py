@@ -80,5 +80,6 @@ class TaskDetailSerializer(TaskSerializer):
             'completed_date',
             'is_owner',
             'watched_id',
-            'watcher_count'
+            'watcher_count',
+            task
         ]
