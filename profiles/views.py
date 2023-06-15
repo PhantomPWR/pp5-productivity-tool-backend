@@ -7,6 +7,7 @@ from .models import Profile
 from watchers.models import Watcher
 from .serializers import ProfileSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
+from django.contrib.auth.models import User
 
 
 class ProfileList(generics.ListAPIView):
