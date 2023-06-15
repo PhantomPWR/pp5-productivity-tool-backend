@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-# from .choices import STATUS_CHOICES
-# from .choices import BACKLOG
 
 
 class Task(models.Model):
@@ -31,8 +29,6 @@ class Task(models.Model):
         (PRIORITY2, "2"),
         (PRIORITY3, "3")
     ]
-
-    status_choices = STATUS_CHOICES
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_date = models.DateTimeField(
