@@ -38,3 +38,12 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         task_count=Count('owner__task', distinct=True),
         watching_count=Count('owner__user_watching', distinct=True)
     ).order_by('-created_at')
+
+
+class UserList(APIView):
+    """
+    List all users
+    """
+    def get(self, request):
+        users = User.objects.all().values()
+        return Response(users)
