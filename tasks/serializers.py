@@ -81,5 +81,5 @@ class TaskDetailSerializer(TaskSerializer):
             'is_owner',
             'watched_id',
             'watcher_count',
-            task
+            'task'
         ]
