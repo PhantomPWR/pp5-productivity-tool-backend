@@ -47,6 +47,9 @@ class Task(models.Model):
     attachments = models.FileField(
         upload_to='images/', default='../default_post_bge1xm', blank=True
     )
+    image = models.FileField(
+        upload_to='images/', default='../default_post_bge1xm', blank=True
+    )
     priority = models.CharField(
         max_length=25,
         choices=PRIORITY_CHOICES,
