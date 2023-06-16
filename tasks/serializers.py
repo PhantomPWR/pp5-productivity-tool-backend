@@ -33,6 +33,12 @@ class TaskSerializer(serializers.ModelSerializer):
             return task_watched.id if task_watched else None
         return None
 
+    def get_priority(self, obj):
+        return obj.get_priority_display()
+        
+    def get_status(self, obj):
+        return obj.get_status_display()
+
     class Meta:
         model = Task
         fields = [
