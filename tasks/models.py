@@ -57,6 +57,14 @@ class Task(models.Model):
             '.xls',
             '.xlsx',
             '.txt',
+            'pdf',
+            'doc',
+            'docx',
+            'ppt',
+            'pptx',
+            'xls',
+            'xlsx',
+            'txt',
         ])],
     )
     image = models.FileField(
