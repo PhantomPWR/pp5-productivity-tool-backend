@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.core.validators import FileExtensionValidator
 
 
 class Task(models.Model):
@@ -45,7 +46,18 @@ class Task(models.Model):
     notes = models.TextField(blank=True)
     owner_comments = models.TextField(blank=True, null=True)
     attachments = models.FileField(
-        upload_to='images/', blank=True
+        upload_to='files/',
+        blank=True,
+        validators=[FileExtensionValidator([
+            '.pdf',
+            '.doc',
+            '.docx',
+            '.ppt',
+            '.pptx',
+            '.xls',
+            '.xlsx',
+            '.txt',
+        ])],
     )
     image = models.FileField(
         upload_to='images/', default='../default_post_bge1xm', blank=True
