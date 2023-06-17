@@ -13,6 +13,7 @@ class TaskSerializer(serializers.ModelSerializer):
     watcher_count = serializers.ReadOnlyField()
     created_date = serializers.SerializerMethodField()
     updated_date = serializers.SerializerMethodField()
+    attachments = serializers.FileField(required=False)
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -48,7 +49,6 @@ class TaskSerializer(serializers.ModelSerializer):
             'category',
             'notes',
             'image',
-            'attachments',
             'profile_id',
             'profile_image',
             'priority',
@@ -66,7 +66,8 @@ class TaskSerializer(serializers.ModelSerializer):
 
 class TaskDetailSerializer(TaskSerializer):
     task = serializers.ReadOnlyField(source='task.id')
-
+    attachments = serializers.FileField(required=False)
+    
     class Meta:
         model = Task
         fields = [
@@ -76,7 +77,6 @@ class TaskDetailSerializer(TaskSerializer):
             'category',
             'notes',
             'image',
-            'attachments',
             'profile_id',
             'profile_image',
             'priority',

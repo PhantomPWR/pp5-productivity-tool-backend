@@ -57,4 +57,3 @@ class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.annotate(
         watcher_count=Count('task_watched__task_watched', distinct=True),
     ).order_by('-created_date')
-
