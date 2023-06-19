@@ -34,9 +34,9 @@ class TaskList(generics.ListCreateAPIView):
         'watcher_count',
     ]
     filterset_fields = [
-        # 'task_watched__owner__profile',
-        'owner__username',
-        # 'owner__profile',
+        'task_watched__owner__profile',
+        # 'owner__username',
+        'owner__profile',
         'title',
         'category',
         'task_status',
