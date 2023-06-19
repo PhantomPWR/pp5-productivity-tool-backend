@@ -45,7 +45,7 @@ class Task(models.Model):
     notes = models.TextField(blank=True)
     owner_comments = models.TextField(blank=True, null=True)
     image = models.FileField(
-        upload_to='images/', default='../default_post_bge1xm', blank=True
+        upload_to='images/', default='../default_post_bge1xm', blank=True, null=True
     )
     priority = models.CharField(
         max_length=25,
