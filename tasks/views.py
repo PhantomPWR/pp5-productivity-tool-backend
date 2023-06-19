@@ -20,29 +20,35 @@ class TaskList(generics.ListCreateAPIView):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
     ]
+
+    queryset = Task.objects.annotate(
+        watcher_count=Count('task_watched__task_watched', distinct=True),
+    ).order_by('-created_date')
+
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
         DjangoFilterBackend
     ]
-    filterset_fields = [
-        'task_watched__owner__profile',
-        'owner__profile'
-    ]
-    queryset = Task.objects.annotate(
-        watcher_count=Count('task_watched__task_watched', distinct=True),
-    ).order_by('-created_date')
-
     ordering_fields = [
         'watcher_count',
     ]
-
-    search_fields = [
+    filterset_fields = [
+        # 'task_watched__owner__profile',
         'owner__username',
-        'owner__profile'
+        # 'owner__profile',
         'title',
         'category',
-        'status',
+        'task_status',
+        'priority'
+    ]
+    search_fields = [
+        'owner__username',
+        'owner__profile__name',
+        # 'profile__owner',
+        'title',
+        'category',
+        'task_status',
         'priority'
 
     ]
