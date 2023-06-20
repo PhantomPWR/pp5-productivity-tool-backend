@@ -13,6 +13,7 @@ class TaskSerializer(serializers.ModelSerializer):
     watcher_count = serializers.ReadOnlyField()
     created_date = serializers.SerializerMethodField()
     updated_date = serializers.SerializerMethodField()
+    due_date = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
         request = self.context['request']
