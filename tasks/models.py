@@ -29,7 +29,8 @@ class Task(models.Model):
     due_date = models.DateField(
         auto_now_add=False,
         auto_now=False,
-        default=timezone.now
+        blank=True,
+        null=True
     )
     updated_date = models.DateTimeField(
         auto_now_add=False,
