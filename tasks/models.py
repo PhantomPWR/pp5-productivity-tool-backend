@@ -26,11 +26,10 @@ class Task(models.Model):
     created_date = models.DateTimeField(
         auto_now_add=True
     )
-    due_date = models.DateField(
+    due_date = models.DateTimeField(
         auto_now_add=False,
         auto_now=False,
-        blank=True,
-        null=True
+        default=timezone.now
     )
     updated_date = models.DateTimeField(
         auto_now_add=False,

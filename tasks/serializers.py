@@ -13,7 +13,7 @@ class TaskSerializer(serializers.ModelSerializer):
     watcher_count = serializers.ReadOnlyField()
     created_date = serializers.SerializerMethodField()
     updated_date = serializers.SerializerMethodField()
-    due_date = serializers.SerializerMethodField()
+    due_date = serializers.DateTimeField()
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -33,12 +33,6 @@ class TaskSerializer(serializers.ModelSerializer):
             ).first()
             return task_watched.id if task_watched else None
         return None
-
-    def get_priority(self, obj):
-        return obj.get_priority_display()
-        
-    def get_status(self, obj):
-        return obj.get_status_display()
 
     class Meta:
         model = Task

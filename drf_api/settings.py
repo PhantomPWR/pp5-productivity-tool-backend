@@ -40,7 +40,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
-    'DATETIME_FORMAT': '%d-%m-%Y',
+    'DATETIME_FORMAT': '%d %m %Y',
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     ),
