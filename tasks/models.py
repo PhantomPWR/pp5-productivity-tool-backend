@@ -10,10 +10,10 @@ class Task(models.Model):
     """
 
     STATUS_CHOICES = [
-        ('BACKLOG', 'Backlog'),
-        ('TODO', 'To Do'),
-        ('INPROGRESS', 'In Progress'),
-        ('COMPLETED', 'Completed')
+        ('Backlog', 'BACKLOG'),
+        ('To Do', 'TODO'),
+        ('In Progress', 'INPROGRESS'),
+        ('Completed', 'COMPLETED')
     ]
 
     PRIORITY_CHOICES = [
