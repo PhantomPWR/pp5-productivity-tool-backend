@@ -10,16 +10,16 @@ class Task(models.Model):
     """
 
     STATUS_CHOICES = [
-        ('Backlog', 'BACKLOG'),
-        ('To Do', 'TODO'),
-        ('In Progress', 'INPROGRESS'),
-        ('Completed', 'COMPLETED')
+        ('BACKLOG', 'Backlog'),
+        ('TODO', 'To Do'),
+        ('INPROGRESS', 'In Progress'),
+        ('COMPLETED', 'Completed')
     ]
 
     PRIORITY_CHOICES = [
-        ('1', 'PRIORITY1'),
-        ('2', 'PRIORITY2'),
-        ('3', 'PRIORITY3')
+        ('PRIORITY1', '1'),
+        ('PRIORITY2', '2'),
+        ('PRIORITY3', '3')
     ]
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
