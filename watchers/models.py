@@ -20,7 +20,10 @@ class Watcher(models.Model):
         related_name='task_watched',
         on_delete=models.CASCADE
     )
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        null=True
+        )
 
     class Meta:
         ordering = ['-created_at']
