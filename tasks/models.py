@@ -27,22 +27,25 @@ class Task(models.Model):
         auto_now_add=True,
     )
     due_date = models.DateField(
-        auto_now_add=False,
-        auto_now=False,
+        # auto_now_add=False,
+        auto_now=True,
         null=True,
-        default=timezone.now
+        blank=True,
+        # default=timezone.now
     )
     updated_date = models.DateTimeField(
-        auto_now_add=False,
-        auto_now=False,
+        # auto_now_add=False,
+        auto_now=True,
         null=True,
-        default=timezone.now
+        blank=True,
+        # default=timezone.now
     )
     completed_date = models.DateTimeField(
-        auto_now_add=False,
-        auto_now=False,
+        # auto_now_add=False,
+        auto_now=True,
         null=True,
-        default=timezone.now
+        blank=True,
+        # default=timezone.now
     )
 
     title = models.CharField(max_length=255)
