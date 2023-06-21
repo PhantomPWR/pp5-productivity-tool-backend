@@ -24,21 +24,24 @@ class Task(models.Model):
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_date = models.DateTimeField(
-        auto_now_add=True
+        auto_now_add=True,
     )
     due_date = models.DateField(
         auto_now_add=False,
         auto_now=False,
+        null=True,
         default=timezone.now
     )
     updated_date = models.DateTimeField(
         auto_now_add=False,
         auto_now=False,
+        null=True,
         default=timezone.now
     )
     completed_date = models.DateTimeField(
         auto_now_add=False,
         auto_now=False,
+        null=True,
         default=timezone.now
     )
 
