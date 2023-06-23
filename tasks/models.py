@@ -49,7 +49,7 @@ class Task(models.Model):
     )
 
     title = models.CharField(max_length=255)
-    notes = models.TextField(blank=True)
+    description = models.TextField(blank=True)
     owner_comments = models.TextField(blank=True, null=True)
     image = models.FileField(
         upload_to='images/', default='../default_post_bge1xm', blank=True, null=True
