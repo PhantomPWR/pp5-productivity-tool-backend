@@ -12,8 +12,8 @@ from drf_api.permissions import IsOwnerOrReadOnly
 
 class TaskList(generics.ListCreateAPIView):
     """
-    List all tasks
-    No Create view (post method), as task creation handled by django signals
+    - List all tasks
+    - Create task if logged in
     """
 
     serializer_class = TaskSerializer
@@ -57,8 +57,36 @@ class TaskList(generics.ListCreateAPIView):
 
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    - Get single task detail
+    """
+
     serializer_class = TaskDetailSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Task.objects.annotate(
         watcher_count=Count('task_watched__task_watched', distinct=True),
     ).order_by('-created_date')
+
+
+class StatusChoicesView(APIView):
+    """
+    - Get available task status choices
+    """
+
+    def get(self, request):
+        status_choices = []
+        for choice in Task.STATUS_CHOICES:
+            status_choices.append({'value': choice[0], 'label': choice[1]})
+        return Response(status_choices)
+
+
+class PriorityChoicesView(APIView):
+    """
+    - Get available task priority choices
+    """
+
+    def get(self, request):
+        priority_choices = []
+        for choice in Task.PRIORITY_CHOICES:
+            priority_choices.append({'value': choice[0], 'label': choice[1]})
+        return Response(priority_choices)

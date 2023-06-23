@@ -89,3 +89,13 @@ class TaskDetailSerializer(TaskSerializer):
             'watcher_count',
             'task'
         ]
+
+
+class StatusChoicesSerializer(serializers.Serializer):
+    value = serializers.CharField(max_length=25)
+    label = serializers.CharField(max_length=25)
+
+
+class PriorityChoicesSerializer(serializers.Serializer):
+    value = serializers.CharField(max_length=25)
+    label = serializers.CharField(max_length=25)
