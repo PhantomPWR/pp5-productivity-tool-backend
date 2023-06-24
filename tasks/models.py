@@ -27,32 +27,29 @@ class Task(models.Model):
         auto_now_add=True,
     )
     due_date = models.DateField(
-        # auto_now_add=False,
         auto_now=True,
         null=True,
         blank=True,
-        # default=timezone.now
     )
     updated_date = models.DateTimeField(
-        # auto_now_add=False,
         auto_now=True,
         null=True,
         blank=True,
-        # default=timezone.now
     )
     completed_date = models.DateTimeField(
-        # auto_now_add=False,
         auto_now=True,
         null=True,
         blank=True,
-        # default=timezone.now
     )
 
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     owner_comments = models.TextField(blank=True, null=True)
     image = models.FileField(
-        upload_to='images/', default='../default_post_bge1xm', blank=True, null=True
+        upload_to='images/',
+        default='../default_post_bge1xm',
+        blank=True,
+        null=True
     )
     priority = models.CharField(
         max_length=25,
@@ -64,10 +61,16 @@ class Task(models.Model):
         choices=STATUS_CHOICES,
         default='BACKLOG'
     )
-    category = models.CharField(
-        max_length=255,
-        blank=False,
-        default="Uncategorised"
+    # category = models.CharField(
+    #     max_length=255,
+    #     blank=False,
+    #     default="Uncategorised"
+    # )
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
 
     class Meta:
@@ -77,4 +80,17 @@ class Task(models.Model):
         return f'{self.id} {self.title}'
 
 
-# To-do: Add category model to pre-populate a select list
+class Category(models.Model):
+    """
+    Model for Categories - Used to group Tasks within a category.
+    """
+    title = models.CharField(max_length=50, null=False, blank=False)
+    description = models.CharField(max_length=150)
+    related_tasks = models.ManyToManyField(
+        Task,
+        related_name="categories",
+        blank=True,
+    )
+
+    def __str__(self):
+        return str(self.title)
