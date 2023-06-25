@@ -6,7 +6,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Task, Category
 from comments.models import Comment
-from watchers.models import Watcher
 from .serializers import (
     TaskSerializer,
     TaskDetailSerializer,
@@ -28,7 +27,6 @@ class TaskList(generics.ListCreateAPIView):
     ]
 
     queryset = Task.objects.annotate(
-        watcher_count=Count('task_watched__task_watched', distinct=True),
         comment_count=Count('comment', distinct=True),
     ).order_by('-created_date')
 
@@ -38,10 +36,9 @@ class TaskList(generics.ListCreateAPIView):
         DjangoFilterBackend
     ]
     ordering_fields = [
-        'watcher_count',
+        'comment_count',
     ]
     filterset_fields = [
-        'task_watched__owner__profile',
         'owner__username',
         'owner__profile',
         'title',
@@ -71,7 +68,7 @@ class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TaskDetailSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Task.objects.annotate(
-        watcher_count=Count('task_watched__task_watched', distinct=True),
+        comment_count=Count('comment', distinct=True),
     ).order_by('-created_date')
 
 
