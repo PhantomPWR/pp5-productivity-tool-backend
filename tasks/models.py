@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from datetime import date
 from django.contrib.auth.models import User
 from categories.models import Category
 
@@ -37,10 +38,11 @@ class Task(models.Model):
         null=True,
         blank=True,
     )
-    completed_date = models.DateTimeField(
-        auto_now=True,
+    completed_date = models.CharField(
+        max_length=50,
         null=True,
         blank=True,
+        default=''
     )
 
     title = models.CharField(max_length=255)
@@ -67,6 +69,11 @@ class Task(models.Model):
         null=True,
         blank=True,
     )
+
+    def save(self, *args, **kwargs):
+        if self.task_status == 'COMPLETED':
+            self.updated_date = date.today()
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['-created_date']

@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from rest_framework import serializers
 from tasks.models import Task
@@ -12,6 +13,7 @@ class TaskSerializer(serializers.ModelSerializer):
     comment_count = serializers.ReadOnlyField()
     created_date = serializers.SerializerMethodField()
     updated_date = serializers.SerializerMethodField()
+    completed_date = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -22,6 +24,11 @@ class TaskSerializer(serializers.ModelSerializer):
 
     def get_updated_date(self, obj):
         return naturaltime(obj.updated_date)
+
+    def update(self, instance, validated_data):
+        if 'task_status' in validated_data and validated_data['task_status'] == 'COMPLETED':
+            instance.completed_date = timezone.now()
+        return super().update(instance, validated_data)
 
     def get_priority(self, obj):
         return obj.get_priority_display()
