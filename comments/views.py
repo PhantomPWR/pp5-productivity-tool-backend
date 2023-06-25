@@ -24,7 +24,7 @@ class CommentList(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_fields = [
-        'related_task',
+        'task',
         'owner',
     ]
 

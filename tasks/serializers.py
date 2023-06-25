@@ -28,6 +28,7 @@ class AssignedToSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username']
 
+
 class TaskSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
@@ -111,7 +112,8 @@ class TaskDetailSerializer(TaskSerializer):
             'due_date',
             'updated_date',
             'completed_date',
-            'task'
+            'task',
+            'comment_count',
         ]
 
 

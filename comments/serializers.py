@@ -29,7 +29,7 @@ class CommentSerializer(serializers.ModelSerializer):
             'is_owner',
             'profile_id',
             'profile_image',
-            'related_task',
+            'task',
             'content',
             'created_date',
             'updated_date',
