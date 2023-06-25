@@ -3,7 +3,6 @@ from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Task, Category
 from comments.models import Comment
 from rest_framework import (
     filters,
@@ -11,6 +10,7 @@ from rest_framework import (
     permissions,
     status,
 )
+from .models import Task, Category
 from .serializers import (
     TaskSerializer,
     TaskDetailSerializer

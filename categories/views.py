@@ -38,7 +38,7 @@ class CategoryList(generics.ListCreateAPIView):
     search_fields = '__all__'
 
     def perform_create(self, serializer):
-        serializer.save(id='pk')
+        serializer.save(id=id)
 
 
 class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
