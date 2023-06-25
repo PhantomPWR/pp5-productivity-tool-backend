@@ -29,7 +29,7 @@ class CommentSerializer(serializers.ModelSerializer):
             'is_owner',
             'profile_id',
             'profile_image',
-            'task',
+            'related_task',
             'content',
             'created_date',
             'updated_date',
@@ -40,4 +40,4 @@ class CommentDetailSerializer(CommentSerializer):
     """
     Serializer for the Comment model used in Task Detail view
     """
-    task = serializers.ReadOnlyField(source='task.id')
+    related_task = serializers.ReadOnlyField(source='task.id')

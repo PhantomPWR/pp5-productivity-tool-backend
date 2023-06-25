@@ -44,6 +44,11 @@ class Task(models.Model):
         blank=True,
         default=''
     )
+    assigned_to = models.ManyToManyField(
+        User,
+        blank=True,
+        related_name='assigned_to'
+    )
 
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)

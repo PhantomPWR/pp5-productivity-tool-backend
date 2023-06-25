@@ -11,7 +11,7 @@ class Comment(models.Model):
         User,
         on_delete=models.CASCADE
     )
-    task = models.ForeignKey(
+    related_task = models.ForeignKey(
         Task, on_delete=models.CASCADE
     )
     created_date = models.DateTimeField(

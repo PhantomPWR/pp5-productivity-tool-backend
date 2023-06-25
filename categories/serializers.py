@@ -6,9 +6,8 @@ from tasks.models import Task
 class CategorySerializer(serializers.ModelSerializer):
     title = serializers.CharField(max_length=100)
     description = serializers.CharField(max_length=255)
-    related_tasks = serializers.SlugRelatedField(
+    related_tasks = serializers.PrimaryKeyRelatedField(
         many=True,
-        slug_field='id',
         queryset=Task.objects.all(),
     )
 
