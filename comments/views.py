@@ -1,14 +1,13 @@
 from django.http import Http404, JsonResponse
 from django.db.models import Count
 from django.contrib.humanize.templatetags.humanize import naturaltime
-from rest_framework import status, permissions, filters, generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import serializers
 from rest_framework import (
-    status,
-    permissions,
     filters,
-    generics
+    generics,
+    permissions,
+    status,
 )
 from .models import Task, Comment
 from .serializers import CommentSerializer, CommentDetailSerializer

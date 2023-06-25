@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from categories.models import Category
 
 
 class Task(models.Model):
@@ -44,7 +45,6 @@ class Task(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    owner_comments = models.TextField(blank=True, null=True)
     image = models.FileField(
         upload_to='images/',
         default='../default_post_bge1xm',
@@ -62,7 +62,7 @@ class Task(models.Model):
         default='BACKLOG'
     )
     category = models.ForeignKey(
-        'Category',
+        'categories.Category',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -73,19 +73,3 @@ class Task(models.Model):
 
     def __str__(self):
         return f'{self.id} {self.title}'
-
-
-class Category(models.Model):
-    """
-    Model for Categories - Used to group Tasks within a category.
-    """
-    title = models.CharField(max_length=50, null=False, blank=False)
-    description = models.CharField(max_length=150)
-    related_tasks = models.ManyToManyField(
-        Task,
-        related_name="task",
-        blank=True,
-    )
-
-    def __str__(self):
-        return str(self.title)
