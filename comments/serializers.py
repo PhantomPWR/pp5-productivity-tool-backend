@@ -40,4 +40,4 @@ class CommentDetailSerializer(CommentSerializer):
     """
     Serializer for the Comment model used in Task Detail view
     """
-    related_task = serializers.ReadOnlyField(source='task.id')
+    task = serializers.ReadOnlyField(source='task.id')
