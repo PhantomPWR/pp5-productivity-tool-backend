@@ -6,23 +6,6 @@ from tasks.models import Task
 from categories.models import Category
 
 
-# class MultipleChoiceField(serializers.MultipleChoiceField):
-#     def to_representation(self, value):
-#         if isinstance(value, list):
-#             users = User.objects.filter(id__in=value)
-#             return [user.username for user in users]
-#         elif isinstance(value, User):  # Handle single object
-#             return value.username
-#         return value
-
-#     def to_internal_value(self, data):
-#         if isinstance(data, str):  # Handle string input
-#             return data.split(',') if data else []
-#         elif isinstance(data, list):  # Handle list input
-#             users = User.objects.filter(id__in=data)
-#             return list(users)
-#         return []
-
 class AssignedToSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -39,11 +22,6 @@ class TaskSerializer(serializers.ModelSerializer):
     updated_date = serializers.SerializerMethodField()
     completed_date = serializers.ReadOnlyField()
     assigned_to = AssignedToSerializer(many=True)
-    # assigned_to = serializers.PrimaryKeyRelatedField(
-    #     queryset=User.objects.all(),
-    #     many=True
-    # )
-    # assigned_to = MultipleChoiceField(choices=[(user.id, user.username) for user in User.objects.all()])
 
     def get_is_owner(self, obj):
         request = self.context['request']
