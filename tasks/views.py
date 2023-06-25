@@ -4,9 +4,15 @@ from rest_framework import status, permissions, filters, generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Task
+from .models import Task, Category
+from comments.models import Comment
 from watchers.models import Watcher
-from .serializers import TaskSerializer, TaskDetailSerializer
+from .serializers import (
+    TaskSerializer,
+    TaskDetailSerializer,
+    CategorySerializer,
+    CategoryDetailSerializer
+)
 from drf_api.permissions import IsOwnerOrReadOnly
 
 
@@ -23,6 +29,7 @@ class TaskList(generics.ListCreateAPIView):
 
     queryset = Task.objects.annotate(
         watcher_count=Count('task_watched__task_watched', distinct=True),
+        comment_count=Count('comment', distinct=True),
     ).order_by('-created_date')
 
     filter_backends = [
@@ -90,3 +97,36 @@ class PriorityChoicesView(APIView):
         for choice in Task.PRIORITY_CHOICES:
             priority_choices.append({'value': choice[0], 'label': choice[1]})
         return Response(priority_choices)
+
+
+class CategoryList(generics.ListCreateAPIView):
+    """
+    - List all categories
+    - Create category if logged in
+    """
+
+    serializer_class = Category
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    queryset = Category.objects.all()
+
+    filter_backends = [
+        filters.OrderingFilter,
+        filters.SearchFilter,
+        DjangoFilterBackend
+    ]
+    filterset_fields = '__all__'
+    search_fields = '__all__'
+
+    def perform_create(self, serializer):
+        serializer.save(id='pk')
+
+
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    - Get single category detail
+    """
+
+    serializer_class = CategoryDetailSerializer

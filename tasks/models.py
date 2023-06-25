@@ -61,11 +61,6 @@ class Task(models.Model):
         choices=STATUS_CHOICES,
         default='BACKLOG'
     )
-    # category = models.CharField(
-    #     max_length=255,
-    #     blank=False,
-    #     default="Uncategorised"
-    # )
     category = models.ForeignKey(
         'Category',
         on_delete=models.SET_NULL,
@@ -88,7 +83,7 @@ class Category(models.Model):
     description = models.CharField(max_length=150)
     related_tasks = models.ManyToManyField(
         Task,
-        related_name="categories",
+        related_name="task",
         blank=True,
     )
 

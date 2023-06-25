@@ -109,6 +109,7 @@ INSTALLED_APPS = [
 
     'profiles',
     'tasks',
+    'comments',
     'watchers',
 ]
 SITE_ID = 1
