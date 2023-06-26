@@ -21,8 +21,10 @@ class TaskSerializer(serializers.ModelSerializer):
     created_date = serializers.SerializerMethodField()
     updated_date = serializers.SerializerMethodField()
     completed_date = serializers.ReadOnlyField()
-    # assigned_to = AssignedToSerializer(many=True)
-    assigned_to = AssignedToSerializer()
+    assigned_to = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        many=True,
+    )
 
     def get_is_owner(self, obj):
         request = self.context['request']

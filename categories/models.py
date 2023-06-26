@@ -1,5 +1,4 @@
 from django.db import models
-# from tasks.models import Task
 
 
 class Category(models.Model):
