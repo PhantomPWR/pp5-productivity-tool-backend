@@ -1,10 +1,12 @@
 from django.db import models
 from django.utils import timezone
 from datetime import date
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
 from categories.models import Category
+
+User = get_user_model()
 
 
 class Task(models.Model):
