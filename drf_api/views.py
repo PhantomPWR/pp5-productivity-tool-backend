@@ -9,7 +9,7 @@ from .settings import (
 @api_view()
 def root_route(request):
     return Response({
-        "message": "Welcome to the Productivity Tool drf API!"
+        "message": "Welcome to the Tick Off drf API!"
     })
 
 # dj-rest-auth logout view fix

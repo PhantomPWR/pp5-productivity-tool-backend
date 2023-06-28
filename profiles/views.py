@@ -14,16 +14,18 @@ from drf_api.permissions import IsOwnerOrReadOnly
 class ProfileList(generics.ListAPIView):
     """
     - List all profiles
-    - No Create view (post method), as profile creation handled by django signals
+    - No Create view (post method),
+      as profile creation handled by django signals
     """
 
-    serializer_class = ProfileSerializer
     queryset = Profile.objects.annotate(
         task_count=Count(
             'owner__task',
             distinct=True
         ),
     ).order_by('-created_at')
+
+    serializer_class = ProfileSerializer
 
     filter_backends = [
         filters.OrderingFilter,
@@ -44,7 +46,6 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     - Profile details
     """
 
-    serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
 
     queryset = Profile.objects.annotate(
@@ -53,6 +54,8 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
             distinct=True
         ),
     ).order_by('-created_at')
+
+    serializer_class = ProfileSerializer
 
 
 class UserList(APIView):
