@@ -9,7 +9,7 @@ from categories.models import Category
 class AssignedToSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username']
+        fields = ['id', 'username']
 
 
 class TaskSerializer(serializers.ModelSerializer):
