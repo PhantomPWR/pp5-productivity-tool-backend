@@ -18,11 +18,6 @@ class TaskSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     comment_count = serializers.ReadOnlyField()
-    # created_date = serializers.SerializerMethodField()
-    # updated_date = serializers.SerializerMethodField()
-    # due_date = serializers.DateTimeField(
-    #     format="%d-%m-%Y %H:%M:%S"
-    # )
     completed_date = serializers.ReadOnlyField()
     assigned_to = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
