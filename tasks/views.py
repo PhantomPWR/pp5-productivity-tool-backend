@@ -64,7 +64,15 @@ class TaskList(generics.ListCreateAPIView):
     ]
 
     def perform_create(self, serializer):
-        print(self.request.user)
+        # print(self.request.user)
+        created_date = datetime.datetime.strptime(self.request.data.get(
+            'created_date'),
+            "%d-%m-%Y %H:%M"
+            )
+        due_date = datetime.datetime.strptime(self.request.data.get(
+            'due_date'),
+            "%d-%m-%Y %H:%M"
+            )
         serializer.save(owner=self.request.user)
 
 
