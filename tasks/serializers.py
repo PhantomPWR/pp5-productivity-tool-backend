@@ -6,13 +6,6 @@ from tasks.models import Task
 from categories.models import Category
 
 
-# class AssignedToSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ['id', 'username']
-#         fields = ['id',]
-
-
 class TaskSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
