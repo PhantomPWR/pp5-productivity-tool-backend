@@ -12,8 +12,11 @@ class TaskSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     comment_count = serializers.ReadOnlyField()
-    created_date = serializers.SerializerMethodField()
-    updated_date = serializers.SerializerMethodField()
+    # created_date = serializers.SerializerMethodField()
+    # updated_date = serializers.SerializerMethodField()
+    # due_date = serializers.DateTimeField(
+    #     format="%d-%m-%Y %H:%M:%S"
+    # )
     completed_date = serializers.ReadOnlyField()
     assigned_to = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
@@ -25,10 +28,22 @@ class TaskSerializer(serializers.ModelSerializer):
         return request.user == obj.owner
 
     def get_created_date(self, obj):
-        return naturaltime(obj.created_date)
+        return naturaltime(
+            obj.created_date,
+            format="%d-%m-%Y %H:%M:%S"
+        )
 
     def get_updated_date(self, obj):
-        return naturaltime(obj.updated_date)
+        return naturaltime(
+            obj.updated_date,
+            format="%d-%m-%Y %H:%M:%S"
+        )
+    
+    def get_due_date(self, obj):
+        return naturaltime(
+            obj.due_date,
+            format="%d-%m-%Y %H:%M:%S"
+        )
 
     def update(self, instance, validated_data):
         if ('task_status' in validated_data and
