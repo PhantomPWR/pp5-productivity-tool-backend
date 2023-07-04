@@ -34,8 +34,14 @@ class CategoryList(generics.ListCreateAPIView):
         filters.SearchFilter,
         DjangoFilterBackend
     ]
-    filterset_fields = '__all__'
-    search_fields = '__all__'
+    filterset_fields = [
+        'title',
+        'description',
+    ]
+    search_fields = [
+        'title',
+        'description',
+    ]
 
     def perform_create(self, serializer):
         serializer.save()

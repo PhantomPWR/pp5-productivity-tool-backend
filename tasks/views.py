@@ -1,11 +1,12 @@
 from django.http import Http404, JsonResponse
 from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
+from django_filters import rest_framework as filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from comments.models import Comment
 from rest_framework import (
-    filters,
+    filters as drf_filters,
     generics,
     permissions,
     status,
@@ -16,6 +17,11 @@ from .serializers import (
     TaskDetailSerializer
 )
 from drf_api.permissions import IsOwnerOrReadOnly
+
+
+class TaskFilter(filters.FilterSet):
+    created_date__month = filters.NumberFilter(field_name='created_date', lookup_expr='month')
+    due_date__month = filters.NumberFilter(field_name='due_date', lookup_expr='month')
 
 
 class TaskList(generics.ListCreateAPIView):
@@ -33,11 +39,17 @@ class TaskList(generics.ListCreateAPIView):
         comment_count=Count('comment', distinct=True),
     ).order_by('-created_date')
 
+    # filter_backends = [
+    #     filters.OrderingFilter,
+    #     filters.SearchFilter,
+    #     DjangoFilterBackend
+    # ]
     filter_backends = [
-        filters.OrderingFilter,
-        filters.SearchFilter,
-        DjangoFilterBackend
+        drf_filters.OrderingFilter,
+        drf_filters.SearchFilter,
+        filters.DjangoFilterBackend
     ]
+
     ordering_fields = [
         'comment_count',
     ]
@@ -45,26 +57,19 @@ class TaskList(generics.ListCreateAPIView):
         'owner__username',
         'owner__profile__name',
         'assigned_to__username',
-        'assigned_to',
         'title',
         'description',
-        'category__title',
-        'category__description',
-        'task_status',
         'priority',
+        'task_status',
     ]
     search_fields = [
         'owner__username',
         'owner__profile__name',
         'assigned_to__username',
-        'assigned_to',
         'title',
         'description',
-        'category__title',
-        'category__description',
-        'task_status',
         'priority',
-
+        'task_status',
     ]
 
     def perform_create(self, serializer):
