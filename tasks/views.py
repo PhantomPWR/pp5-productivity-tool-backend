@@ -20,8 +20,14 @@ from drf_api.permissions import IsOwnerOrReadOnly
 
 
 class TaskFilter(filters.FilterSet):
-    created_date__month = filters.NumberFilter(field_name='created_date', lookup_expr='month')
-    due_date__month = filters.NumberFilter(field_name='due_date', lookup_expr='month')
+    created_date__month = filters.NumberFilter(
+        field_name='created_date',
+        lookup_expr='month'
+    )
+    due_date__month = filters.NumberFilter(
+        field_name='due_date',
+        lookup_expr='month'
+    )
 
 
 class TaskList(generics.ListCreateAPIView):
@@ -39,11 +45,6 @@ class TaskList(generics.ListCreateAPIView):
         comment_count=Count('comment', distinct=True),
     ).order_by('-created_date')
 
-    # filter_backends = [
-    #     filters.OrderingFilter,
-    #     filters.SearchFilter,
-    #     DjangoFilterBackend
-    # ]
     filter_backends = [
         drf_filters.OrderingFilter,
         drf_filters.SearchFilter,
