@@ -39,7 +39,7 @@ class TaskSerializer(serializers.ModelSerializer):
             obj.updated_date,
             format="%d-%m-%Y %H:%M:%S"
         )
-    
+
     def get_due_date(self, obj):
         return naturaltime(
             obj.due_date,
