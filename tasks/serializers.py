@@ -116,3 +116,8 @@ class StatusChoicesSerializer(serializers.Serializer):
 class PriorityChoicesSerializer(serializers.Serializer):
     value = serializers.CharField(max_length=25)
     label = serializers.CharField(max_length=25)
+
+
+class CategoryChoicesSerializer(serializers.Serializer):
+    value = serializers.CharField(max_length=25)
+    label = serializers.CharField(max_length=25)

@@ -111,3 +111,19 @@ class PriorityChoicesView(APIView):
         for choice in Task.PRIORITY_CHOICES:
             priority_choices.append({'value': choice[0], 'label': choice[1]})
         return Response(priority_choices)
+
+
+class CategoryChoicesView(APIView):
+    """
+    - Get available category choices
+    """
+
+    def get(self, request):
+        categories = Category.objects.all()
+        category_choices = []
+        for category in categories:
+            category_choices.append({
+                'value': category.id,
+                'label': category.title
+                })
+        return Response(category_choices)
