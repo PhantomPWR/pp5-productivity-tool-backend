@@ -183,4 +183,5 @@ Fork the repository using the following steps:
   - URL: [https://github.com/Code-Institute-Solutions/drf-api](https://github.com/Code-Institute-Solutions/drf-api)
 
 ### Acknowledgments
-CREDIT: [CI Django Rest Framework Walkthrough](https://github.com/Code-Institute-Solutions/drf-api)
+Starting point for code: [CI Django Rest Framework Walkthrough](https://github.com/Code-Institute-Solutions/drf-api)
+README: For structure and which sections to include, I took inspiration from [Niclas Tanskanen](https://github.com/niclastanskanen)
