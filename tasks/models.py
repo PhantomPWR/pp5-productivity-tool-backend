@@ -1,12 +1,9 @@
 from django.db import models
 from django.utils import timezone
 from datetime import date
-# from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 
 from categories.models import Category
-
-User = get_user_model()
 
 
 class Task(models.Model):
@@ -32,7 +29,7 @@ class Task(models.Model):
     created_date = models.DateTimeField(
         auto_now_add=True,
     )
-    due_date = models.DateTimeField(
+    due_date = models.DateField(
         auto_now=True,
         null=True,
         blank=True,
