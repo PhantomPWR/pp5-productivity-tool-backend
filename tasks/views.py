@@ -14,43 +14,52 @@ class TaskList(generics.ListCreateAPIView):
     - API endpoint for listing and creating tasks
     - Allow task create if logged in
     """
-
     serializer_class = TaskSerializer
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly
-    ]
-
-    queryset = Task.objects.annotate(
-        comment_count=Count('comment', distinct=True),
-    ).order_by('-created_date')
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     filter_backends = [
         DjangoFilterBackend,
         filters.OrderingFilter,
         filters.SearchFilter,
     ]
-
-    ordering_fields = [
-        'comment_count',
-    ]
     filterset_fields = [
         'owner__username',
-        'owner__profile__name',
-        'assigned_to__username',
+        'owner__profile',
+        'assigned_to',
         'title',
         'description',
         'priority',
         'task_status',
+        'category',
+        'category__title'
     ]
     search_fields = [
         'owner__username',
-        'owner__profile__name',
-        'assigned_to__username',
         'title',
         'description',
         'priority',
         'task_status',
+        'created_date',
+        'category__title'
     ]
+    ordering_fields = [
+        'comment_count',
+    ]
+
+    def get_queryset(self):
+        """
+        - Retrieve the queryset of tasks
+        - Add filtering by category title
+        - Add comment_count to each task
+        """
+        queryset = Task.objects.all()
+        category_title = self.request.query_params.get('category__title', None)
+        if category_title is not None:
+            queryset = queryset.filter(category__title__iexact=category_title)
+        queryset = Task.objects.annotate(
+            comment_count=Count('comment', distinct=True),
+        ).order_by('-created_date')
+        return queryset
 
     def perform_create(self, serializer):
         """

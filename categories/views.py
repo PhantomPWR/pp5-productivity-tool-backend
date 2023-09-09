@@ -54,3 +54,16 @@ class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
 
     serializer_class = CategoryDetailSerializer
     queryset = Category.objects.all()
+
+    def get_object(self):
+        """
+         - Retrieve the category object with given
+           ID/PK from the URL parameters
+         - Return the category object
+         - Raise 404 if not found
+        """
+        try:
+            category_id = self.kwargs['pk']
+            return self.queryset.get(pk=category_id)
+        except Category.DoesNotExist:
+            raise Http404

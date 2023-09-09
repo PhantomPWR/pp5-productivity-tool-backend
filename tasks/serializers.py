@@ -4,6 +4,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from tasks.models import Task
 from categories.models import Category
+from comments.models import Comment
 
 
 class AssignedToSerializer(serializers.ModelSerializer):
@@ -28,6 +29,10 @@ class TaskSerializer(serializers.ModelSerializer):
     assigned_to = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
     )
+    category_title = serializers.SerializerMethodField()
+
+    def get_category_title(self, obj):
+        return obj.category.title
 
     def get_is_owner(self, obj):
         """
@@ -70,6 +75,7 @@ class TaskSerializer(serializers.ModelSerializer):
             'assigned_to',
             'title',
             'category',
+            'category_title',
             'description',
             'image',
             'profile_id',
@@ -109,6 +115,7 @@ class TaskDetailSerializer(TaskSerializer):
             'assigned_to',
             'title',
             'category',
+            'category_title',
             'description',
             'image',
             'profile_id',
