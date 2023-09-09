@@ -1,39 +1,18 @@
-from django.http import Http404, JsonResponse
 from django.db.models import Count
-from django_filters.rest_framework import DjangoFilterBackend
-from django_filters import rest_framework as filters
 from rest_framework.views import APIView
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters, generics, permissions
 from rest_framework.response import Response
-from comments.models import Comment
-from rest_framework import (
-    filters as drf_filters,
-    generics,
-    permissions,
-    status,
-)
+from .serializers import TaskSerializer, TaskDetailSerializer
+from drf_api.permissions import IsAssignedUserOrOwnerOrReadOnly
 from .models import Task, Category
-from .serializers import (
-    TaskSerializer,
-    TaskDetailSerializer
-)
-from drf_api.permissions import IsOwnerOrReadOnly
-
-
-class TaskFilter(filters.FilterSet):
-    created_date__month = filters.NumberFilter(
-        field_name='created_date',
-        lookup_expr='month'
-    )
-    due_date__month = filters.NumberFilter(
-        field_name='due_date',
-        lookup_expr='month'
-    )
+from comments.models import Comment
 
 
 class TaskList(generics.ListCreateAPIView):
     """
-    - List all tasks
-    - Create task if logged in
+    - API endpoint for listing and creating tasks
+    - Allow task create if logged in
     """
 
     serializer_class = TaskSerializer
@@ -46,9 +25,9 @@ class TaskList(generics.ListCreateAPIView):
     ).order_by('-created_date')
 
     filter_backends = [
-        drf_filters.OrderingFilter,
-        drf_filters.SearchFilter,
-        filters.DjangoFilterBackend
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+        filters.SearchFilter,
     ]
 
     ordering_fields = [
@@ -74,16 +53,19 @@ class TaskList(generics.ListCreateAPIView):
     ]
 
     def perform_create(self, serializer):
+        """
+        - Save created task and assign the owner
+        """
         serializer.save(owner=self.request.user)
 
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    - Get single task detail
+    - API endpoint to read, update & delete a single task
     """
 
     serializer_class = TaskDetailSerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsAssignedUserOrOwnerOrReadOnly]
     queryset = Task.objects.annotate(
         comment_count=Count('comment', distinct=True),
     ).order_by('-created_date')
@@ -91,7 +73,7 @@ class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class StatusChoicesView(APIView):
     """
-    - Get available task status choices
+    - API endpoint for getting available task status choices
     """
 
     def get(self, request):
@@ -103,7 +85,7 @@ class StatusChoicesView(APIView):
 
 class PriorityChoicesView(APIView):
     """
-    - Get available task priority choices
+    - API endpoint for getting available task priority choices
     """
 
     def get(self, request):
@@ -115,12 +97,15 @@ class PriorityChoicesView(APIView):
 
 class CategoryChoicesView(APIView):
     """
-    - Get available category choices
+    - API endpoint for getting available category choices
     """
 
     def get(self, request):
         categories = Category.objects.all()
         category_choices = []
         for category in categories:
-            category_choices.append({'value': category.id, 'label': category.title})
+            category_choices.append({
+                'value': category.id,
+                'label': category.title
+            })
         return Response(category_choices)
