@@ -17,6 +17,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = [
+            'id',
             'title',
             'description',
             'related_tasks',
@@ -32,6 +33,7 @@ class CategoryDetailSerializer(CategorySerializer):
     class Meta:
         model = Category
         fields = [
+            'id',
             'title',
             'description',
             'related_tasks',
