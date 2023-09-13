@@ -29,6 +29,9 @@ class TaskSerializer(serializers.ModelSerializer):
     assigned_to = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
     )
+    category = serializers.PrimaryKeyRelatedField(
+        queryset=Category.objects.all(),
+    )
     category_title = serializers.SerializerMethodField()
 
     def get_category_title(self, obj):
@@ -39,8 +42,10 @@ class TaskSerializer(serializers.ModelSerializer):
         - Check if user making request is the owner
           of the Task object
         """
-        request = self.context['request']
-        return request.user == obj.owner
+        request = self.context.get('request')
+        if request:
+            return request.user == obj.owner
+        return False
 
     def update(self, instance, validated_data):
         """
