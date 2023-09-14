@@ -58,7 +58,7 @@ class TaskList(generics.ListCreateAPIView):
             queryset = queryset.filter(category__title__iexact=category_title)
         queryset = Task.objects.annotate(
             comment_count=Count('comment', distinct=True),
-        ).order_by('created_date')
+        ).order_by('-created_date')
         return queryset
 
     def perform_create(self, serializer):
