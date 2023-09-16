@@ -20,9 +20,7 @@ class Comment(models.Model):
     updated_date = models.DateTimeField(
         auto_now=True
     )
-    content = models.TextField(
-        null=True,
-    )
+    content = models.TextField()
 
     class Meta:
         ordering = ['-created_date']
