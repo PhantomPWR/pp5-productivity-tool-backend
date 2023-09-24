@@ -20,9 +20,9 @@ class Task(models.Model):
     ]
 
     PRIORITY_CHOICES = [
-        ('PRIORITY1', '1'),
-        ('PRIORITY2', '2'),
-        ('PRIORITY3', '3')
+        ('PRIORITY1', 'High'),
+        ('PRIORITY2', 'Medium'),
+        ('PRIORITY3', 'Low')
     ]
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
