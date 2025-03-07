@@ -3,7 +3,7 @@
     "builds": [
         {
             "src": "drf_api/wsgi.py",
-            "use": "@vercel/python",
+            "use": "@vercel/python3.9.12",
             "config": { "maxLambdaSize": "15mb", "runtime": "python3.9.12" }
         },
         {
