@@ -140,7 +140,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
         os.environ.get('CLIENT_ORIGIN')
-     ]
+    ]
 
 if 'CLIENT_ORIGIN_DEV' in os.environ:
     extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
@@ -190,9 +190,9 @@ if 'DEV' in os.environ:
     }
 else:
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get("HEROKU_POSTGRESQL_PINK_URL"))
+        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
     }
-    print(os.environ.get("HEROKU_POSTGRESQL_PINK_URL"))
+    print(os.environ.get("DATABASE_URL"))
     print('connected')
 
 

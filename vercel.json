@@ -2,11 +2,15 @@
     "version": 2,
     "builds": [
         {
-            "src": "pp5-tick-off-backend/wsgi.py",
-            "use": "@vercel/python"
+            "src": "drf_api/wsgi.py",
+            "use": "@vercel/python",
+            "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+        },
+        {
+            "src": "build_files.sh"
         }
     ],
     "routes": [
-        { "src": "/(.*)", "dest": "pp5-tick-off-backend/wsgi.py" }
+        { "src": "/(.*)", "dest": "drf_api/wsgi.py" }
     ]
 }  
