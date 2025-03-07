@@ -192,6 +192,7 @@ else:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get("HEROKU_POSTGRESQL_PINK_URL"))
     }
+    print(os.environ.get("HEROKU_POSTGRESQL_PINK_URL"))
     print('connected')
 
 
