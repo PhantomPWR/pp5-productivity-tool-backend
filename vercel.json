@@ -7,10 +7,11 @@
             "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
         },
         {
-            "src": "build_files.sh"
+            "src": "build_files.sh",
+            "use": "@vercel/static-build"
         }
     ],
     "routes": [
-        { "src": "/(.*)", "dest": "drf_api/wsgi.py", "use": "@vercel/python" }
+        { "src": "/(.*)", "dest": "drf_api/wsgi.py" }
     ]
 }  
