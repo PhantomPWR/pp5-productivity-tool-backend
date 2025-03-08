@@ -13,21 +13,27 @@
 
 ## Table of Contents
 
-- [Database Schema](#database-schema)
-- [Testing](#testing)
-- [Technologies Used](#technologies-used)
-  - [Languages and Frameworks Used](#languages-and-frameworks-used)
-  - [Python Modules Used](#python-modules-used)
-  - [Packages Used](#packages-used)
-  - [Programs and Tools Used](#programs-and-tools-used)
-- [Deployment](#deployment)
-  - [Forking the GitHub Repository](#forking-the-github-repository)
-  - [Making a Local Clone](#making-a-local-clone)
-  - [Deploying with Heroku](#deploying-with-heroku)
-- [Credits](#credits)
-  - [Online resources](#online-resources)
-  - [Code](#code)
-  - [Acknowledgments](#acknowledgments)
+- [Ticked Off API](#ticked-off-api)
+  - [The Live link can be found here -\> Ticked Off API](#the-live-link-can-be-found-here---ticked-off-api)
+    - [React Frontend Project URLs](#react-frontend-project-urls)
+  - [Table of Contents](#table-of-contents)
+  - [Database Schema](#database-schema)
+  - [Testing](#testing)
+    - [Manual Testing](#manual-testing)
+  - [Code Validation](#code-validation)
+  - [Technologies Used](#technologies-used)
+    - [Languages and Frameworks](#languages-and-frameworks)
+    - [Python Modules](#python-modules)
+    - [Packages](#packages)
+    - [Programs and Tools Used](#programs-and-tools-used)
+  - [Deployment](#deployment)
+    - [Forking the GitHub Repository](#forking-the-github-repository)
+    - [Making a Local Clone](#making-a-local-clone)
+    - [Deploying to Heroku](#deploying-to-heroku)
+  - [Credits](#credits)
+    - [Online resources](#online-resources)
+    - [Code](#code)
+    - [Acknowledgments](#acknowledgments)
 
 <hr>
 
@@ -72,7 +78,7 @@ All files passed, **except** settings.py and migration files, which contained "l
 
 - [Python](https://www.python.org/)
 - [Django](https://pypi.org/project/Django/3.2.14/)
-- [Django-REST-framework](https://www.django-rest-framework.org/) - Toolkit for building web API's with Django.
+- [Django-REST-framework](https://www.django-rest-framework.org/) - Toolkit for building web APIs with Django.
 
 ### Python Modules
 
