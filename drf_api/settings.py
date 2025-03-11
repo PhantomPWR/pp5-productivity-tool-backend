@@ -84,6 +84,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '.herokuapp.com',
     'localhost:5173',
+    'localhost:3000',
+    'pp5-productivity-tool.herokuapp.com',
 ]
 
 
