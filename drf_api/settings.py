@@ -35,14 +35,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if 'DEV' in os.environ:
     print('//////////// WE ARE IN DEV MODE ////////////')
 
+if 'DEV' in os.environ:
+    authentication_class = 'rest_framework.authentication.SessionAuthentication'
+    print('Authentication: SessionAuthentication')
+else:
+    authentication_class = 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+    print('Authentication: JWTCookieAuthentication')
+
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [(
-        'rest_framework.authentication.SessionAuthentication',
-        print('Authentication: SessionAuthentication')
-        if 'DEV' in os.environ
-        else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-        print('Authentication: JWTCookieAuthentication')
-    )],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        authentication_class,
+    ],
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
