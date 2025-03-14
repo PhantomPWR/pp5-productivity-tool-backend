@@ -63,7 +63,7 @@ JWT_AUTH_REFRESH_COOKIE = 'drf-api-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
 REST_AUTH = {
-    'USE_JWT': True,
+    'USE_JWT': False,
     'JWT_AUTH_COOKIE:': 'drf-api-auth',
     'JWT_AUTH_REFRESH_COOKIE': 'drf-api-refresh-token',
 }
