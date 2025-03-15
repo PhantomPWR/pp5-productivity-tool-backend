@@ -61,7 +61,7 @@ if 'DEV' not in os.environ:
         'rest_framework.renderers.JSONRenderer',
     ]
 
-# REST_USE_JWT = True
+REST_USE_JWT = True
 # USE_JWT = True
 JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = 'drf-api-auth'
@@ -69,7 +69,7 @@ JWT_AUTH_REFRESH_COOKIE = 'drf-api-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
 REST_AUTH = {
-    # 'USE_JWT': True,
+    'USE_JWT': True,
     # 'JWT_AUTH_COOKIE:': 'drf-api-auth',
     # 'JWT_AUTH_REFRESH_COOKIE': 'drf-api-refresh-token',
 }

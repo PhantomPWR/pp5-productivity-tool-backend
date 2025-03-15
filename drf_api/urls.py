@@ -1,27 +1,4 @@
-"""
-URL configuration for the DRF API backend.
-
-This module defines the URL patterns for the 
-Django REST Framework (DRF) API backend.
-It includes routes for authentication, registration, 
-and various app-specific endpoints.
-
-Routes:
-- Root route for the API.
-- Admin site route.
-- DRF built-in authentication route.
-- Custom logout route for dj-rest-auth.
-- dj-rest-auth routes for authentication and registration.
-- App-specific routes for profiles, tasks, categories, and comments.
-
-Note:
-- The custom logout route is placed above the default dj-rest-auth route
-to ensure it is matched first.
-"""
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.contrib import admin
 from django.urls import path, include
 from .views import root_route, logout_route
@@ -30,6 +7,8 @@ from tasks.views import TaskList, TaskDetail
 
 
 urlpatterns = [
+    path('dj-rest-auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('dj-rest-auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('', root_route),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
