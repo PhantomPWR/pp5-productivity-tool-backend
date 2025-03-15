@@ -40,8 +40,6 @@ urlpatterns = [
         'dj-rest-auth/registration/',
         include('dj_rest_auth.registration.urls')
     ),
-    # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # path('status-choices/', status_choices_view, name='status-choices'),
     path('', include('profiles.urls')),
     path('', include('tasks.urls')),
