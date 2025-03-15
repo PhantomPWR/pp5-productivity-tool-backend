@@ -32,16 +32,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if 'DEV' in os.environ:
     print('//////////// WE ARE IN DEV MODE ////////////')
 
-if 'DEV' in os.environ:
-    AUTHENTICATION_CLASS = 'rest_framework.authentication.SessionAuthentication'
-    print('Authentication: SessionAuthentication')
-else:
-    AUTHENTICATION_CLASS = 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
-    print('Authentication: JWTCookieAuthentication')
+# if 'DEV' in os.environ:
+#     AUTHENTICATION_CLASS = 'rest_framework.authentication.SessionAuthentication'
+#     print('Authentication: SessionAuthentication')
+# else:
+#     # AUTHENTICATION_CLASS = 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+#     # print('Authentication: JWTCookieAuthentication')
+#     AUTHENTICATION_CLASS = 'rest_framework_simplejwt.authentication.JWTAuthentication'
+#     print('Authentication: JWTAuthentication')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        AUTHENTICATION_CLASS,
+        # AUTHENTICATION_CLASS,
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.PageNumberPagination',
@@ -121,6 +125,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth.registration',
     'corsheaders',
+    'rest_framework_simplejwt',
 
     'profiles',
     'tasks',
